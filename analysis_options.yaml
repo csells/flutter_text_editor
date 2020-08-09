@@ -1,0 +1,4 @@
+analyzer:
+  errors:
+    # HACK: enable ui.platformViewRegistry.registerViewFactory in html_element_widget.html
+    undefined_prefixed_name: ignore
