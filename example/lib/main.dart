@@ -38,11 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               Expanded(
-                child: SingleChildScrollView(
-                  child: TextEditor(
-                    autofocus: true,
-                    controller: _controller,
-                  ),
+                child: TextEditor(
+                  autofocus: true,
+                  controller: _controller,
                 ),
               ),
             ],

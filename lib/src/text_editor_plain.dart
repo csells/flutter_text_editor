@@ -14,13 +14,11 @@ class TextEditor extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-        child: TextField(
-          maxLines: null,
-          autofocus: autofocus,
-          controller: _controller,
-          decoration: InputDecoration(border: InputBorder.none, hintText: 'input'),
-          onChanged: onChanged,
-        ),
-      );
+  Widget build(BuildContext context) => TextField(
+    maxLines: null,
+    autofocus: autofocus,
+    controller: _controller,
+    decoration: InputDecoration(border: InputBorder.none, hintText: 'input'),
+    onChanged: onChanged,
+  );
 }

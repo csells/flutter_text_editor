@@ -20,10 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
+import 'package:flutter/gestures.dart' show PointerSignalEvent, PointerScrollEvent;
 import 'dart:async';
 import 'dart:html' as html;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'html_element_widget.dart';
 
 class TextAreaWidget extends HtmlElementWidget {
@@ -55,6 +58,10 @@ class TextAreaWidgetState extends HtmlElementWidgetState<TextAreaWidget> {
   @override
   html.HtmlElement createHtmlElement(BuildContext context) => _element;
 
+  String get text => _element?.text;
+
+  set text(String text) => _element?.text = text;
+
   @override
   void initState() {
     super.initState();
@@ -77,8 +84,20 @@ class TextAreaWidgetState extends HtmlElementWidgetState<TextAreaWidget> {
 
   void _onInput(html.Event event) => widget.onChanged?.call(_element.value);
 
-  String get text => _element?.text;
-  set text(String text) => _element?.text = text;
+  void _onPointerSignal(PointerSignalEvent event) {
+    if(event is PointerScrollEvent) {
+      final delta = event.scrollDelta;
+      _element.scrollBy(delta.dx, delta.dy);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Listener(
+      onPointerSignal: _onPointerSignal,
+      child: super.build(context),
+    );
+  }
 
   @override
   void dispose() {

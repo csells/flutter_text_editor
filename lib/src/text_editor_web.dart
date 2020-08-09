@@ -42,7 +42,6 @@ class _TextEditorState extends State<TextEditor> {
     // final color = '#${theme.color.value.toRadixString(16)}';
     final styleStr =
         'border: 0; outline: none; resize: none; font-family: $fontFamily; font-size: $fontSize; font-weight: $fontWeight;';
-    print('style: $styleStr');
     return styleStr;
   }
 
