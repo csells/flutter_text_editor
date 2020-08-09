@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class TextEditor extends StatelessWidget {
   final bool autofocus;
   final TextEditingController _controller;
+  final ValueChanged<String> onChanged;
   const TextEditor({
     Key key,
-    this.autofocus,
+    this.autofocus = false,
     @required TextEditingController controller,
+    this.onChanged,
   })  : _controller = controller,
         assert(controller != null),
         super(key: key);
@@ -18,6 +20,7 @@ class TextEditor extends StatelessWidget {
           autofocus: autofocus,
           controller: _controller,
           decoration: InputDecoration(border: InputBorder.none, hintText: 'input'),
+          onChanged: onChanged,
         ),
       );
 }

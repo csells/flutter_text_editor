@@ -2,17 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:text_editor/src/web/textarea_widget.dart';
 
-class TextEditor extends StatelessWidget {
+class TextEditor extends StatefulWidget {
   final bool autofocus;
-  final TextEditingController _controller;
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
   TextEditor({
     Key key,
-    this.autofocus,
-    @required TextEditingController controller,
-  })  : _controller = controller,
-        assert(controller != null),
-        super(key: key) {
-    controller.addListener(_copyText);
+    this.autofocus = false,
+    this.controller,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  _TextEditorState createState() => _TextEditorState();
+}
+
+class _TextEditorState extends State<TextEditor> {
+  String _styleStr;
+  final _key = GlobalKey();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _styleStr = _getStyle(context);
+    widget.controller?.addListener(_copyText);
+  }
+
+  void _copyText() {
+    final state = _key.currentState as TextAreaWidgetState;
+    state.text = widget.controller.text;
   }
 
   String _getStyle(BuildContext context) {
@@ -30,11 +48,13 @@ class TextEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextAreaWidget(
-        initialValue: _controller.text,
-        autofocus: autofocus,
-        style: _getStyle(context),
-        onChanged: (value) => _controller.text = value,
+        key: _key,
+        initialValue: widget.controller?.text,
+        autofocus: widget.autofocus,
+        style: _styleStr,
+        onChanged: (value) {
+          widget.controller?.text = value;
+          widget.onChanged?.call(value);
+        },
       );
-
-  void _copyText() {}
 }

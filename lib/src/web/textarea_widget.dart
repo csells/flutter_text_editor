@@ -75,9 +75,10 @@ class TextAreaWidgetState extends HtmlElementWidgetState<TextAreaWidget> {
       ..style.cssText = widget.style;
   }
 
-  void _onInput(html.Event event) {
-    widget.onChanged?.call(_element.value);
-  }
+  void _onInput(html.Event event) => widget.onChanged?.call(_element.value);
+
+  String get text => _element?.text;
+  set text(String text) => _element?.text = text;
 
   @override
   void dispose() {
