@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
+        debugShowCheckedModeBanner: false,
       );
 }
 
@@ -30,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(MyApp.title),
           actions: [
-            IconButton(icon: Icon(Icons.ac_unit), onPressed: () => _controller.text = 'hello, world'),
+            IconButton(icon: Icon(Icons.ac_unit), onPressed: () => _controller.text = 'snow'),
           ],
         ),
         body: Padding(

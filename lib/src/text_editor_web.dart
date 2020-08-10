@@ -30,7 +30,7 @@ class _TextEditorState extends State<TextEditor> {
 
   void _copyText() {
     final state = _key.currentState as TextAreaWidgetState;
-    state.text = widget.controller.text;
+    if (state.text != widget.controller.text) state.text = widget.controller.text;
   }
 
   String _getStyle(BuildContext context) {

@@ -58,9 +58,8 @@ class TextAreaWidgetState extends HtmlElementWidgetState<TextAreaWidget> {
   @override
   html.HtmlElement createHtmlElement(BuildContext context) => _element;
 
-  String get text => _element?.text;
-
-  set text(String text) => _element?.text = text;
+  String get text => _element.value;
+  set text(String text) => _element.value = text;
 
   @override
   void initState() {
