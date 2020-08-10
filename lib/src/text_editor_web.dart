@@ -41,7 +41,7 @@ class _TextEditorState extends State<TextEditor> {
     final fontWeight = int.parse(style.fontWeight.toString().split('w').last);
     // final color = '#${theme.color.value.toRadixString(16)}';
     final styleStr =
-        'border: 0; outline: none; resize: none; font-family: $fontFamily; font-size: $fontSize; font-weight: $fontWeight;';
+        'width: 100%; height: 100%; border: 0; outline: none; resize: none; font-family: $fontFamily; font-size: $fontSize; font-weight: $fontWeight;';
     return styleStr;
   }
 

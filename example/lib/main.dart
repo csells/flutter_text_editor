@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:text_editor/text_editor.dart';
 
 void main() => runApp(MyApp());
@@ -24,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String _md = '';
   final _controller = TextEditingController();
 
   @override
@@ -36,14 +38,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Padding(
           padding: EdgeInsets.all(8),
-          child: Column(
+          child: Row(
             children: [
               Expanded(
                 child: TextEditor(
                   autofocus: true,
                   controller: _controller,
+                  onChanged: (value) => setState(() => _md = value),
                 ),
               ),
+              Expanded(
+                child: Markdown(data: _md),
+              )
             ],
           ),
         ),
