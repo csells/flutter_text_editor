@@ -4,11 +4,16 @@ import 'package:text_editor/src/web/textarea_widget.dart';
 
 class TextEditor extends StatefulWidget {
   final bool autofocus;
+  final String hintText;
+  final int maxlines;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
+
   TextEditor({
     Key key,
     this.autofocus = false,
+    this.hintText = '',
+    this.maxlines,
     this.controller,
     this.onChanged,
   }) : super(key: key);
@@ -50,6 +55,8 @@ class _TextEditorState extends State<TextEditor> {
         key: _key,
         initialValue: widget.controller?.text,
         autofocus: widget.autofocus,
+        placeholder: widget.hintText,
+        rows: widget.maxlines,
         style: _styleStr,
         onChanged: (value) {
           widget.controller?.text = value;

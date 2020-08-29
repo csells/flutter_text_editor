@@ -30,20 +30,24 @@ import 'package:flutter/material.dart';
 import 'html_element_widget.dart';
 
 class TextAreaWidget extends HtmlElementWidget {
+  final String initialValue;
+  final String wrap;
+  final String style;
+  final bool autofocus;
+  final String placeholder;
+  final int rows;
+  final ValueChanged<String> onChanged;
+
   const TextAreaWidget({
     Key key,
     this.initialValue = '',
     this.wrap = 'soft',
     this.style = 'border: 0; outline: none; resize: none;',
     this.autofocus,
+    this.placeholder,
+    this.rows,
     this.onChanged,
   }) : super(key: key);
-
-  final String initialValue;
-  final String wrap;
-  final String style;
-  final bool autofocus;
-  final ValueChanged<String> onChanged;
 
   @override
   HtmlElementWidgetState<HtmlElementWidget> createState() {
@@ -68,6 +72,8 @@ class TextAreaWidgetState extends HtmlElementWidgetState<TextAreaWidget> {
       ..wrap = widget.wrap
       ..value = widget.initialValue
       ..autofocus = widget.autofocus
+      ..placeholder = widget.placeholder
+      ..rows = widget.rows
       ..style.cssText = widget.style;
 
     _onInputSub = _element.onInput.listen(_onInput);
@@ -84,7 +90,7 @@ class TextAreaWidgetState extends HtmlElementWidgetState<TextAreaWidget> {
   void _onInput(html.Event event) => widget.onChanged?.call(_element.value);
 
   void _onPointerSignal(PointerSignalEvent event) {
-    if(event is PointerScrollEvent) {
+    if (event is PointerScrollEvent) {
       final delta = event.scrollDelta;
       _element.scrollBy(delta.dx, delta.dy);
     }
